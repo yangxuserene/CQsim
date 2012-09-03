@@ -1,0 +1,6 @@
+adapt_data=size
+check_data_name=mode,ad_bf,ave_uti,ave_uti,ave_uti
+check_data_para=-1,-1,1,0,1
+ave_uti=600,3600
+adapt_item=0,1,-1,3,3,0,1
+adapt_item=0,1,1,3,3,1,2

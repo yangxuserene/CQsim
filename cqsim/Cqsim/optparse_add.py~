@@ -1,0 +1,59 @@
+import optparse
+import os
+import sys
+from datetime import datetime
+import time
+
+
+def datetime_strptime (value, format):
+    """Parse a datetime like datetime.strptime in Python >= 2.5"""
+    return datetime(*time.strptime(value, format)[0:6])
+
+class Option (optparse.Option):
+    
+    """An extended optparse option with cbank-specific types.
+    
+    Types:
+    date -- parse a datetime from a variety of string formats
+    """
+    
+    DATE_FORMATS = [
+        "%Y-%m-%d",
+        "%Y-%m-%d %H:%M:%S",
+        "%Y-%m-%d %H:%M",
+        "%y-%m-%d",
+        "%y-%m-%d %H:%M:%S",
+        "%y-%m-%d %H:%M",
+        "%m/%d/%Y",
+        "%m/%d/%Y %H:%M:%S",
+        "%m/%d/%Y %H:%M",
+        "%m/%d/%y",
+        "%m/%d/%y %H:%M:%S",
+        "%m/%d/%y %H:%M",
+        "%Y%m%d",
+    ]
+    
+    def check_date (self, opt, value):
+        """Parse a datetime from a variety of string formats."""
+        for format in self.DATE_FORMATS:
+            try:
+                dt = datetime_strptime(value, format)
+            except ValueError:
+                continue
+            else:
+                # Python can't translate dates before 1900 to a string,
+                # causing crashes when trying to build sql with them.
+                if dt < datetime(1900, 1, 1):
+                    raise optparse.OptionValueError(
+                        "option %s: date must be after 1900: %s" % (opt, value))
+                else:
+                    return dt
+        raise optparse.OptionValueError(
+            "option %s: invalid date: %s" % (opt, value))
+    
+    TYPES = optparse.Option.TYPES + ( "date", )
+    
+
+    TYPE_CHECKER = optparse.Option.TYPE_CHECKER.copy()
+    TYPE_CHECKER['date'] = check_date
+

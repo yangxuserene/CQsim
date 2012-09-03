@@ -1,0 +1,71 @@
+import Filter.Filter_node as filter_node
+
+__metaclass__ = type
+class Filter_node_SWF(filter_node.Filter_node):
+    def read_node_struc(self):
+        nr_sign =';'    # Not read sign. Mark the line not the job data
+        sep_sign =' '   # The sign seperate data in a line
+        sep_sign2 =':'   # The sign seperate data in a line
+        nameList=[]
+        nameList.append(["MaxNodes","node"])
+        nameList.append(["MaxProcs","proc"])
+        regex_rest = " *:([^\n]+)\n"
+        regexList = []
+        node_info={}
+        
+        for dataName in nameList:
+            regexList.append([raw_input(dataName[0]+regex_rest),dataName[1]])
+
+        nodeFile = open(self.struc,'r')
+        while (1):
+            tempStr = nodeFile.readline()
+            if not tempStr :    # break when no more line
+                break
+            if tempStr[0] == nr_sign:   # The information line
+                for dataRegex in regexList.append:
+                    matchResult = re.findall(dataRegex[0],tempStr)
+                    if (matchResult):
+                        node_info[dataRegex[1]]=strip(dataRegex)
+                        break
+            else:
+                break
+        nodeFile.close()
+        self.node_data_build(node_info)
+        self.nodeNum = len(self.nodeList)
+
+    def node_data_build(self,node_info):
+        node_num = node_info['proc']
+        self.nodeList=[]
+        i = 0
+        while (i < node_num):
+            self.nodeList=[].append ({"id": i+1, \
+                                      "location": [1], \
+                                      "group": 1, \
+                                      "state": -1, \
+                                      "proc": 1, \
+                                      "start": -1, \
+                                      "end": -1, \
+                                      "extend": None})
+            i += 1
+        return 1
+
+    def output_node_data(self):
+        if not self.save:
+            print "Save file not set!"
+            return
+        
+        sep_sign = ";"
+        f2=open(self.save,"w")
+        
+        for jobResult_o in self.jobList:
+            f2.write(str(jobResult_o['id']))
+            f2.write(sep_sign)
+            f2.write(str(jobResult_o['location']))
+            f2.write(sep_sign)
+            f2.write(str(jobResult_o['group']))
+            f2.write(sep_sign)
+            f2.write(str(jobResult_o['state']))
+            f2.write(sep_sign)
+            f2.write(str(jobResult_o['proc']))
+            f2.write("\n")
+        f2.close()

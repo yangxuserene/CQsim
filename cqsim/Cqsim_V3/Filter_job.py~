@@ -1,0 +1,60 @@
+from datetime import datetime
+import time
+
+__metaclass__ = type
+
+class Filter_job:
+    def __init__(self, trace, save=None, sdate=None, start=-1, density=1.0, anchor=0, rnum=0, debug=None):
+        self.start = start
+        self.sdate = sdate
+        self.density = float(density)
+        self.anchor = int(anchor)
+        self.rnum = int(rnum)
+        self.trace = str(trace)
+        self.save = str(save)
+        self.debug = debug
+        self.jobNum = -1
+        self.jobList=[]
+    
+    def reset(self, trace=None, save=None, sdate=None, start=None, density=None, anchor=None, rnum=None, debug=None):
+        if trace:
+            self.trace = trace
+        if save:
+            self.save = save
+        if start:
+            self.start = start
+        if sdate:
+            self.sdate = sdate
+        if density:
+            self.density = float(density)
+        if anchor:
+            self.anchor = int(anchor)
+        if rnum:
+            self.rnum = int(rnum)
+        if trace:
+            self.trace = str(trace)
+        if save:
+            self.save = str(save)
+        if debug:
+            self.debug = debug
+        self.jobNum = -1
+        self.jobList=[]
+    
+    def read_job_trace(self):
+        return
+    
+    def job_check(self,jobInfo):
+        return
+
+    def get_job_num(self):
+        return self.jobNum
+
+    def get_job_data(self):
+        return self.jobList
+    
+    def output_job_data(self):
+        if not self.save:
+            print "Save file not set!"
+            return
+        return
+    

@@ -1,0 +1,17 @@
+a.set_AveUtiInter([3600,36000,86400],["1H","10H","24H"],1800,864000)
+a.set_submitDensity(1.0)
+a.set_dropPercent(0)
+a.set_graph_uti(180000, 0, 2)
+a.set_fileType(".rst",".uti",".adj")
+
+a.set_SWFfile("SDSC-SP2-1998-4.1-cln.swf","(ORG)SDSC-SP2",5000,0)
+
+a.addTask("1.0*(w*100.0/z)+0.0*(l*100/t)",1,'k',0,"BF=1\nW=1\nCons",color="darkblue")
+a.addTask("1.0*(w*100.0/z)+0.0*(l*100/t)",4,'k',0,"BF=1\nW=4\nCons",color="darkblue")
+a.addTask("0.5*(w*100.0/z)+0.5*(l*100/t)",1,'k',0,"BF=0.5\nW=1\nCons",color="darkblue")
+a.addTask("0.5*(w*100.0/z)+0.5*(l*100/t)",4,'k',0,"BF=0.5\nW=4\nCons",color="darkblue")
+
+a.addTask("1.0*(w*100.0/z)+0.0*(l*100/t)",1,'1',0,"BF=1\nW=1\nEASY",color="orange")
+a.addTask("1.0*(w*100.0/z)+0.0*(l*100/t)",4,'1',0,"BF=1\nW=4\nEASY",color="orange")
+a.addTask("0.5*(w*100.0/z)+0.5*(l*100/t)",1,'1',0,"BF=0.5\nW=1\nEASY",color="orange")
+a.addTask("0.5*(w*100.0/z)+0.5*(l*100/t)",4,'1',0,"BF=0.5\nW=4\nEASY",color="orange")

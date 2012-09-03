@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Cqsim</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.python.pydev.PyDevBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.python.pydev.pythonNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>data/InputFiles/SDSC-SP2-1998-4.1-cln.swf</name>
+			<type>1</type>
+			<location>/home/rdongxu/workspace/Cqsim/data/InputFiles/SDSC-SP2-1998-4.1-cln.swf</location>
+		</link>
+		<link>
+			<name>data/InputFiles/test2.swf</name>
+			<type>1</type>
+			<location>/home/rdongxu/workspace/Cqsim/data/InputFiles/test2.swf</location>
+		</link>
+		<link>
+			<name>data/InputFiles/test3.swf</name>
+			<type>1</type>
+			<location>/home/rdongxu/workspace/Cqsim/data/InputFiles/test3.swf</location>
+		</link>
+		<link>
+			<name>src/Config/ad_win_para.set</name>
+			<type>1</type>
+			<location>/home/rdongxu/workspace/Cqsim/src/Config/ad_win_para.set</location>
+		</link>
+	</linkedResources>
+</projectDescription>

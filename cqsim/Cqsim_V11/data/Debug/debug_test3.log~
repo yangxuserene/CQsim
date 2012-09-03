@@ -1,0 +1,312 @@
+# Filter Job
+# Filter Node
+# Job Trace
+# Node Structure
+# Info Collect
+# Backfill
+******************************
+******************************
+******************************
+['size']
+['mode', 'ad_bf', 'ave_uti', 'ave_uti']
+[-1, 1, 0, 1]
+[600, 3600]
+[[0, 1, -1, 3, 3, 0, 1], [0, 1, 1, 3, 3, 1, 2]]
+[600, 3600]
+******************************
+******************************
+******************************
+# Start Window
+# Basic Algorithm
+# Cqsim Sim
+               
+===============
+===============
+               
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+------------------------------
+  Time: 0.0
+   {'type': 1, 'para': [1, 0], 'prio': 2, 'time': 0.0}
+------------------------------
+  Wait: []
+  Run : []
+------------------------------
+  Tot:100 Idle:100 Avail:100 
+------------------------------
+[Submit]  0
+>>>>>>>>>>>>>>>   {'waitSize': 100, 'waitNum': 1, 'inter': 0.0, 'ad_bf': [0, 0], 'extend': None, 'time': 0.0, 'date': 0.0, 'uti': 0.0, 'ave_uti': [-1, -1], 'event': 'Q'}
+[Start]  0
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 0.0, 'ad_bf': [0, 0], 'extend': None, 'time': 0.0, 'date': 0.0, 'uti': 1.0, 'ave_uti': [0, 0], 'event': 'S'}
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 500, 'ad_bf': [0, 0], 'extend': None, 'time': 0, 'date': 0, 'uti': 1.0, 'ave_uti': [0, 0], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 500.0, 'ad_bf': [0, 0], 'extend': None, 'time': 500, 'date': 500, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'Q'}
+               
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+------------------------------
+  Time: 1000.0
+   {'type': 1, 'para': [1, 1], 'prio': 2, 'time': 1000.0}
+------------------------------
+  Wait: []
+  Run : [0]
+------------------------------
+  Tot:100 Idle:0 Avail:0 
+------------------------------
+[Submit]  1
+>>>>>>>>>>>>>>>   {'waitSize': 60, 'waitNum': 1, 'inter': 0.0, 'ad_bf': [0, 0], 'extend': None, 'time': 1000.0, 'date': 1000.0, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'Q'}
+>>>>>>>>>>>>>>>   {'waitSize': 60, 'waitNum': 1, 'inter': 500, 'ad_bf': [0, 0], 'extend': None, 'time': 1000, 'date': 1000, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 60, 'waitNum': 1, 'inter': 500.0, 'ad_bf': [0, 0], 'extend': None, 'time': 1500, 'date': 1500, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'Q'}
+               
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+------------------------------
+  Time: 2000.0
+   {'type': 1, 'para': [1, 2], 'prio': 2, 'time': 2000.0}
+------------------------------
+  Wait: [1]
+  Run : [0]
+------------------------------
+  Tot:100 Idle:0 Avail:0 
+------------------------------
+[Submit]  2
+>>>>>>>>>>>>>>>   {'waitSize': 80, 'waitNum': 2, 'inter': 0.0, 'ad_bf': [0, 0], 'extend': None, 'time': 2000.0, 'date': 2000.0, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'Q'}
+>>>>>>>>>>>>>>>   {'waitSize': 80, 'waitNum': 2, 'inter': 500, 'ad_bf': [0, 0], 'extend': None, 'time': 2000, 'date': 2000, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 80, 'waitNum': 2, 'inter': 500.0, 'ad_bf': [0, 0], 'extend': None, 'time': 2500, 'date': 2500, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'Q'}
+               
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+------------------------------
+  Time: 3000.0
+   {'type': 1, 'para': [1, 3], 'prio': 2, 'time': 3000.0}
+------------------------------
+  Wait: [1, 2]
+  Run : [0]
+------------------------------
+  Tot:100 Idle:0 Avail:0 
+------------------------------
+[Submit]  3
+>>>>>>>>>>>>>>>   {'waitSize': 170, 'waitNum': 3, 'inter': 0.0, 'ad_bf': [0, 0], 'extend': None, 'time': 3000.0, 'date': 3000.0, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'Q'}
+>>>>>>>>>>>>>>>   {'waitSize': 170, 'waitNum': 3, 'inter': 500, 'ad_bf': [0, 0], 'extend': None, 'time': 3000, 'date': 3000, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 170, 'waitNum': 3, 'inter': 500.0, 'ad_bf': [0, 0], 'extend': None, 'time': 3500, 'date': 3500, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'Q'}
+               
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+------------------------------
+  Time: 4000.0
+   {'type': 1, 'para': [1, 4], 'prio': 2, 'time': 4000.0}
+------------------------------
+  Wait: [1, 2, 3]
+  Run : [0]
+------------------------------
+  Tot:100 Idle:0 Avail:0 
+------------------------------
+[Submit]  4
+>>>>>>>>>>>>>>>   {'waitSize': 250, 'waitNum': 4, 'inter': 0.0, 'ad_bf': [0, 0], 'extend': None, 'time': 4000.0, 'date': 4000.0, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'Q'}
+>>>>>>>>>>>>>>>   {'waitSize': 250, 'waitNum': 4, 'inter': 500, 'ad_bf': [0, 0], 'extend': None, 'time': 4000, 'date': 4000, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 250, 'waitNum': 4, 'inter': 500.0, 'ad_bf': [0, 0], 'extend': None, 'time': 4500, 'date': 4500, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'Q'}
+               
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+------------------------------
+  Time: 5000.0
+   {'type': 1, 'para': [1, 5], 'prio': 2, 'time': 5000.0}
+------------------------------
+  Wait: [1, 2, 3, 4]
+  Run : [0]
+------------------------------
+  Tot:100 Idle:0 Avail:0 
+------------------------------
+[Submit]  5
+>>>>>>>>>>>>>>>   {'waitSize': 260, 'waitNum': 5, 'inter': 0.0, 'ad_bf': [0, 0], 'extend': None, 'time': 5000.0, 'date': 5000.0, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'Q'}
+>>>>>>>>>>>>>>>   {'waitSize': 260, 'waitNum': 5, 'inter': 500, 'ad_bf': [0, 0], 'extend': None, 'time': 5000, 'date': 5000, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 260, 'waitNum': 5, 'inter': 500.0, 'ad_bf': [0, 0], 'extend': None, 'time': 5500, 'date': 5500, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'Q'}
+               
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+------------------------------
+  Time: 6000.0
+   {'type': 1, 'para': [1, 6], 'prio': 2, 'time': 6000.0}
+------------------------------
+  Wait: [1, 2, 3, 4, 5]
+  Run : [0]
+------------------------------
+  Tot:100 Idle:0 Avail:0 
+------------------------------
+[Submit]  6
+>>>>>>>>>>>>>>>   {'waitSize': 350, 'waitNum': 6, 'inter': 0.0, 'ad_bf': [0, 0], 'extend': None, 'time': 6000.0, 'date': 6000.0, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'Q'}
+>>>>>>>>>>>>>>>   {'waitSize': 350, 'waitNum': 6, 'inter': 500, 'ad_bf': [0, 0], 'extend': None, 'time': 6000, 'date': 6000, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 350, 'waitNum': 6, 'inter': 500, 'ad_bf': [0, 0], 'extend': None, 'time': 6500, 'date': 6500, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 350, 'waitNum': 6, 'inter': 500, 'ad_bf': [0, 0], 'extend': None, 'time': 7000, 'date': 7000, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 350, 'waitNum': 6, 'inter': 500, 'ad_bf': [0, 0], 'extend': None, 'time': 7500, 'date': 7500, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 350, 'waitNum': 6, 'inter': 500, 'ad_bf': [0, 0], 'extend': None, 'time': 8000, 'date': 8000, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 350, 'waitNum': 6, 'inter': 500.0, 'ad_bf': [0, 0], 'extend': None, 'time': 8500, 'date': 8500, 'uti': 1.0, 'ave_uti': [1.0, 1.0], 'event': 'E'}
+               
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+------------------------------
+  Time: 9000.0
+   {'type': 1, 'para': [2, 0], 'prio': 1, 'time': 9000.0}
+------------------------------
+  Wait: [1, 2, 3, 4, 5, 6]
+  Run : [0]
+------------------------------
+  Tot:100 Idle:0 Avail:0 
+------------------------------
+[Finish]  0
+>>>>>>>>>>>>>>>   {'waitSize': 350, 'waitNum': 6, 'inter': 0, 'ad_bf': [0, 0], 'extend': None, 'time': 9000.0, 'date': 9000.0, 'uti': 0.0, 'ave_uti': [1.0, 1.0], 'event': 'E'}
+[Start]  1
+>>>>>>>>>>>>>>>   {'waitSize': 290, 'waitNum': 5, 'inter': 0.0, 'ad_bf': [0, 0], 'extend': None, 'time': 9000.0, 'date': 9000.0, 'uti': 0.6, 'ave_uti': [1.0, 1.0], 'event': 'S'}
+[Start]  2
+>>>>>>>>>>>>>>>   {'waitSize': 270, 'waitNum': 4, 'inter': 0.0, 'ad_bf': [0, 0], 'extend': None, 'time': 9000.0, 'date': 9000.0, 'uti': 0.8, 'ave_uti': [1.0, 1.0], 'event': 'S'}
+>>>>>>>>>>>>>>>   {'waitSize': 270, 'waitNum': 4, 'inter': 500, 'ad_bf': [0, 0], 'extend': None, 'time': 9000, 'date': 9000, 'uti': 0.8, 'ave_uti': [1.0, 1.0], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 270, 'waitNum': 4, 'inter': 500, 'ad_bf': [-1, 0], 'extend': None, 'time': 9500, 'date': 9500, 'uti': 0.8, 'ave_uti': [0.8333333333333334, 0.9722222222222222], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 270, 'waitNum': 4, 'inter': 500, 'ad_bf': [-1, 0], 'extend': None, 'time': 10000, 'date': 10000, 'uti': 0.8, 'ave_uti': [0.8, 0.9444444444444444], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 270, 'waitNum': 4, 'inter': 500, 'ad_bf': [-1, 0], 'extend': None, 'time': 10500, 'date': 10500, 'uti': 0.8, 'ave_uti': [0.8, 0.9166666666666666], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 270, 'waitNum': 4, 'inter': 500, 'ad_bf': [-1, 0], 'extend': None, 'time': 11000, 'date': 11000, 'uti': 0.8, 'ave_uti': [0.8, 0.8888888888888888], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 270, 'waitNum': 4, 'inter': 500, 'ad_bf': [-1, 0], 'extend': None, 'time': 11500, 'date': 11500, 'uti': 0.8, 'ave_uti': [0.8, 0.8611111111111112], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 270, 'waitNum': 4, 'inter': 500, 'ad_bf': [-1, 0], 'extend': None, 'time': 12000, 'date': 12000, 'uti': 0.8, 'ave_uti': [0.8, 0.8333333333333334], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 270, 'waitNum': 4, 'inter': 500.0, 'ad_bf': [-1, 0], 'extend': None, 'time': 12500, 'date': 12500, 'uti': 0.8, 'ave_uti': [0.8, 0.8055555555555556], 'event': 'E'}
+               
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+------------------------------
+  Time: 13000.0
+   {'type': 1, 'para': [2, 1], 'prio': 1, 'time': 13000.0}
+------------------------------
+  Wait: [3, 4, 5, 6]
+  Run : [1, 2]
+------------------------------
+  Tot:100 Idle:20 Avail:20 
+------------------------------
+[Finish]  1
+>>>>>>>>>>>>>>>   {'waitSize': 270, 'waitNum': 4, 'inter': 0.0, 'ad_bf': [-1, 0], 'extend': None, 'time': 13000.0, 'date': 13000.0, 'uti': 0.2, 'ave_uti': [0.8, 0.8], 'event': 'E'}
+[Start]  4
+>>>>>>>>>>>>>>>   {'waitSize': 190, 'waitNum': 3, 'inter': 0.0, 'ad_bf': [-1, 0], 'extend': None, 'time': 13000.0, 'date': 13000.0, 'uti': 1.0, 'ave_uti': [0.8, 0.8], 'event': 'S'}
+>>>>>>>>>>>>>>>   {'waitSize': 190, 'waitNum': 3, 'inter': 500, 'ad_bf': [-1, 0], 'extend': None, 'time': 13000, 'date': 13000, 'uti': 1.0, 'ave_uti': [0.8, 0.8], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 190, 'waitNum': 3, 'inter': 500.0, 'ad_bf': [1, 1], 'extend': None, 'time': 13500, 'date': 13500, 'uti': 1.0, 'ave_uti': [0.9666666666666667, 0.8277777777777777], 'event': 'E'}
+               
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+------------------------------
+  Time: 14000.0
+   {'type': 1, 'para': [2, 4], 'prio': 1, 'time': 14000.0}
+------------------------------
+  Wait: [3, 5, 6]
+  Run : [2, 4]
+------------------------------
+  Tot:100 Idle:0 Avail:0 
+------------------------------
+[Finish]  4
+>>>>>>>>>>>>>>>   {'waitSize': 190, 'waitNum': 3, 'inter': 0.0, 'ad_bf': [1, 0], 'extend': None, 'time': 14000.0, 'date': 14000.0, 'uti': 0.2, 'ave_uti': [1.0, 0.8555555555555555], 'event': 'E'}
+[Start]  5
+>>>>>>>>>>>>>>>   {'waitSize': 180, 'waitNum': 2, 'inter': 0.0, 'ad_bf': [1, 0], 'extend': None, 'time': 14000.0, 'date': 14000.0, 'uti': 0.3, 'ave_uti': [1.0, 0.8555555555555555], 'event': 'S'}
+>>>>>>>>>>>>>>>   {'waitSize': 180, 'waitNum': 2, 'inter': 500, 'ad_bf': [1, 0], 'extend': None, 'time': 14000, 'date': 14000, 'uti': 0.3, 'ave_uti': [1.0, 0.8555555555555555], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 180, 'waitNum': 2, 'inter': 500.0, 'ad_bf': [-1, -1], 'extend': None, 'time': 14500, 'date': 14500, 'uti': 0.3, 'ave_uti': [0.4166666666666667, 0.7861111111111111], 'event': 'E'}
+               
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+------------------------------
+  Time: 15000.0
+   {'type': 1, 'para': [2, 2], 'prio': 1, 'time': 15000.0}
+------------------------------
+  Wait: [3, 6]
+  Run : [2, 5]
+------------------------------
+  Tot:100 Idle:70 Avail:70 
+------------------------------
+[Finish]  2
+>>>>>>>>>>>>>>>   {'waitSize': 180, 'waitNum': 2, 'inter': 0.0, 'ad_bf': [-1, 0], 'extend': None, 'time': 15000.0, 'date': 15000.0, 'uti': 0.1, 'ave_uti': [0.3, 0.7166666666666667], 'event': 'E'}
+[Start]  3
+>>>>>>>>>>>>>>>   {'waitSize': 90, 'waitNum': 1, 'inter': 0.0, 'ad_bf': [-1, 0], 'extend': None, 'time': 15000.0, 'date': 15000.0, 'uti': 1.0, 'ave_uti': [0.3, 0.7166666666666667], 'event': 'S'}
+>>>>>>>>>>>>>>>   {'waitSize': 90, 'waitNum': 1, 'inter': 500, 'ad_bf': [-1, 0], 'extend': None, 'time': 15000, 'date': 15000, 'uti': 1.0, 'ave_uti': [0.3, 0.7166666666666667], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 90, 'waitNum': 1, 'inter': 500, 'ad_bf': [1, 1], 'extend': None, 'time': 15500, 'date': 15500, 'uti': 1.0, 'ave_uti': [0.8833333333333333, 0.7444444444444445], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 90, 'waitNum': 1, 'inter': 500, 'ad_bf': [1, 0], 'extend': None, 'time': 16000, 'date': 16000, 'uti': 1.0, 'ave_uti': [1.0, 0.7722222222222223], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 90, 'waitNum': 1, 'inter': 500.0, 'ad_bf': [1, 0], 'extend': None, 'time': 16500, 'date': 16500, 'uti': 1.0, 'ave_uti': [1.0, 0.8], 'event': 'E'}
+               
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+------------------------------
+  Time: 17000.0
+   {'type': 1, 'para': [2, 3], 'prio': 1, 'time': 17000.0}
+------------------------------
+  Wait: [6]
+  Run : [5, 3]
+------------------------------
+  Tot:100 Idle:0 Avail:0 
+------------------------------
+[Finish]  3
+>>>>>>>>>>>>>>>   {'waitSize': 90, 'waitNum': 1, 'inter': 0.0, 'ad_bf': [1, 0], 'extend': None, 'time': 17000.0, 'date': 17000.0, 'uti': 0.1, 'ave_uti': [1.0, 0.8055555555555556], 'event': 'E'}
+[Start]  6
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 0.0, 'ad_bf': [1, 0], 'extend': None, 'time': 17000.0, 'date': 17000.0, 'uti': 1.0, 'ave_uti': [1.0, 0.8055555555555556], 'event': 'S'}
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 500, 'ad_bf': [1, 0], 'extend': None, 'time': 17000, 'date': 17000, 'uti': 1.0, 'ave_uti': [1.0, 0.8055555555555556], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 500, 'ad_bf': [1, 0], 'extend': None, 'time': 17500, 'date': 17500, 'uti': 1.0, 'ave_uti': [1.0, 0.8055555555555556], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 500, 'ad_bf': [1, 0], 'extend': None, 'time': 18000, 'date': 18000, 'uti': 1.0, 'ave_uti': [1.0, 0.8833333333333333], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 500.0, 'ad_bf': [1, 0], 'extend': None, 'time': 18500, 'date': 18500, 'uti': 1.0, 'ave_uti': [1.0, 0.9805555555555555], 'event': 'E'}
+               
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+------------------------------
+  Time: 19000.0
+   {'type': 1, 'para': [2, 6], 'prio': 1, 'time': 19000.0}
+------------------------------
+  Wait: []
+  Run : [5, 6]
+------------------------------
+  Tot:100 Idle:0 Avail:0 
+------------------------------
+[Finish]  6
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 0.0, 'ad_bf': [1, 0], 'extend': None, 'time': 19000.0, 'date': 19000.0, 'uti': 0.1, 'ave_uti': [1.0, 1.0], 'event': 'E'}
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 500, 'ad_bf': [1, 0], 'extend': None, 'time': 19000, 'date': 19000, 'uti': 0.1, 'ave_uti': [1.0, 1.0], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 500, 'ad_bf': [-1, -1], 'extend': None, 'time': 19500, 'date': 19500, 'uti': 0.1, 'ave_uti': [0.25, 0.875], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 500, 'ad_bf': [-1, 0], 'extend': None, 'time': 20000, 'date': 20000, 'uti': 0.1, 'ave_uti': [0.1, 0.75], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 500, 'ad_bf': [-1, 0], 'extend': None, 'time': 20500, 'date': 20500, 'uti': 0.1, 'ave_uti': [0.1, 0.625], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 500, 'ad_bf': [-1, 0], 'extend': None, 'time': 21000, 'date': 21000, 'uti': 0.1, 'ave_uti': [0.1, 0.5], 'event': 'C'}
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 500.0, 'ad_bf': [-1, 0], 'extend': None, 'time': 21500, 'date': 21500, 'uti': 0.1, 'ave_uti': [0.1, 0.375], 'event': 'E'}
+               
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+------------------------------
+  Time: 22000.0
+   {'type': 1, 'para': [2, 5], 'prio': 1, 'time': 22000.0}
+------------------------------
+  Wait: []
+  Run : [5]
+------------------------------
+  Tot:100 Idle:90 Avail:90 
+------------------------------
+[Finish]  5
+>>>>>>>>>>>>>>>   {'waitSize': 0, 'waitNum': 0, 'inter': 0, 'ad_bf': [-1, 0], 'extend': None, 'time': 22000.0, 'date': 22000.0, 'uti': 0.0, 'ave_uti': [0.1, 0.25], 'event': 'E'}
+===============
+===============
+               
+------ Simulating Done!
+..............................
+..............................
+job_save: test3
+alg: ['w', '+', '2']
+path_out: ../data/Results/
+job_trace: test3.swf
+ad_bf: 1
+node_struc: test3.swf
+ext_ai: .adp
+ext_fmt_j: .csv
+monitor: 500
+bf_para: None
+ext_fmt_n: .csv
+cluster_fraction: 1.0
+ad_win: 0
+config_sys: config_sys.set
+start: 0.0
+ad_win_para: None
+ext_jr: .rst
+win: 5
+start_date: None
+alg_sign: [1, 0, 1]
+backfill: 2
+win_para: ['5', '0', '0']
+ext_fmt_j_c: .con
+node_save: test3_node
+ad_alg_para: None
+output: test3
+ad_alg: 0
+ext_fmt_n_c: .con
+ext_debug: .log
+read_num: 8000
+resource_node: 1
+ext_si: .uti
+pre_name: CQSIM_
+ad_bf_para: ['ad_bf_para.set']
+resource_job: 0
+config_n: config_n.set
+debug: debug_test3
+path_fmt: ../data/Fmt/
+path_in: ../data/InputFiles/
+debug_lvl: 3
+anchor: 0
+path_debug: ../data/Debug/

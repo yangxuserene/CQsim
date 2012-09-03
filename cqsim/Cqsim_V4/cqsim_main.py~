@@ -1,0 +1,15 @@
+import cqsim_path
+import Filter_job_SWF
+
+def  cqsim_main(para_list):
+    print "...................."
+    for item in para_list :
+        print str(item) + ": " + str(para_list[item])
+    print "...................."
+        
+    trace_name = para_list['path_in'] + para_list['job_trace']
+    save_name = para_list['path_tmp'] + para_list['job_save'] + para_list['ext_tmp_job'] 
+    filter_job = Filter_job_SWF.Filter_job_SWF(trace=trace_name, save=save_name)
+    filter_job.read_job_trace()
+    filter_job.output_job_data()
+    

@@ -1,0 +1,305 @@
+import optparse
+import os
+import sys
+from datetime import datetime
+import time
+import cqsim_main
+
+def datetime_strptime (value, format):
+    """Parse a datetime like datetime.strptime in Python >= 2.5"""
+    return datetime(*time.strptime(value, format)[0:6])
+
+class Option (optparse.Option):
+    
+    """An extended optparse option with cbank-specific types.
+    
+    Types:
+    date -- parse a datetime from a variety of string formats
+    """
+    
+    DATE_FORMATS = [
+        "%Y-%m-%d",
+        "%Y-%m-%d %H:%M:%S",
+        "%Y-%m-%d %H:%M",
+        "%y-%m-%d",
+        "%y-%m-%d %H:%M:%S",
+        "%y-%m-%d %H:%M",
+        "%m/%d/%Y",
+        "%m/%d/%Y %H:%M:%S",
+        "%m/%d/%Y %H:%M",
+        "%m/%d/%y",
+        "%m/%d/%y %H:%M:%S",
+        "%m/%d/%y %H:%M",
+        "%Y%m%d",
+    ]
+    
+    def check_date (self, opt, value):
+        """Parse a datetime from a variety of string formats."""
+        for format in self.DATE_FORMATS:
+            try:
+                dt = datetime_strptime(value, format)
+            except ValueError:
+                continue
+            else:
+                # Python can't translate dates before 1900 to a string,
+                # causing crashes when trying to build sql with them.
+                if dt < datetime(1900, 1, 1):
+                    raise optparse.OptionValueError(
+                        "option %s: date must be after 1900: %s" % (opt, value))
+                else:
+                    return dt
+        raise optparse.OptionValueError(
+            "option %s: invalid date: %s" % (opt, value))
+    
+    TYPES = optparse.Option.TYPES + ( "date", )
+    
+    TYPE_CHECKER = optparse.Option.TYPE_CHECKER.copy()
+    TYPE_CHECKER['date'] = check_date
+
+def callback_alg (option, opt_str, value, parser):
+    temp_opt['alg'].append(value)
+    return
+def callback_alg_sign (option, opt_str, value, parser):
+    temp_opt['alg_sign'].append(value)
+    return
+def callback_bf_para (option, opt_str, value, parser):
+    temp_opt['bf_para'].append(value)
+    return
+def callback_ad_sta_para (option, opt_str, value, parser):
+    temp_opt['ad_sta_para'].append(value)
+    return
+def callback_ad_alg_para (option, opt_str, value, parser):
+    temp_opt['ad_alg_para'].append(value)
+    return
+
+def get_raw_name (file_name):
+    output_name = ""
+    length = len(file_name)
+    i = 0
+    while (i < length):
+        if (file_name[i] == '.'):
+            break
+        output_name+=file_name[i]
+        i += 1
+    return output_name
+
+def read_config(fileName):
+    nr_sign =';'    # Not read sign. Mark the line not the job data
+    sep_sign ='='   # The sign seperate data in a line
+    readData={}
+    configFile = open(fileName,'r')
+
+    while (1):
+        tempStr = configFile.readline()
+        if not tempStr :    # break when no more line
+            break
+        if tempStr[0] != nr_sign:   # The job trace line
+            strNum = len(tempStr)
+            newWord = 1
+            k = 0
+            dataName = ""
+            dataValue = ""     
+            
+            for i in range(strNum):
+                if (tempStr[i] == '\n'):
+                    break
+                if (tempStr[i] == sep_sign):
+                    if (newWord == 0):
+                        newWord = 1
+                        k = k+1
+                else:
+                    newWord = 0
+                    if k == 0:
+                        dataName=dataName+ tempStr[i] 
+                    elif k == 1:
+                        dataValue = dataValue + tempStr[i] 
+            readData[dataName]=dataValue
+    configFile.close()
+    
+    return readData
+
+
+if __name__ == "__main__":
+    
+    temp_opt={'alg':[],'alg_sign':[],'bf_para':[],'ad_sta_para':[],'ad_alg_para':[]}
+    p = optparse.OptionParser(option_class=Option)
+    
+    p.add_option("-j", "--job", dest="job_trace", type="string", \
+        help="file name of the job trace")
+    p.add_option("-n", "--node", dest="node_struc", type="string", \
+        help="file name of the node structure")
+    p.add_option("-J", "--job_save", dest="job_save", type="string", \
+        help="file name of the formatted job data")
+    p.add_option("-N", "--node_save", dest="node_save", type="string", \
+        help="file name of the formatted node data")
+    p.add_option("-f", "--frac", dest="cluster_fraction", type="float", \
+        default=1.0, \
+        help="job density adjust")
+    p.add_option("-s", "--start", dest="start", type="float", \
+        default=0.0, \
+        help="virtual job trace start time")
+
+    p.add_option("-S", "--start_date", dest="start_date", type="date", \
+        help="job trace start date")
+
+    p.add_option("-r", "--anchor", dest="anchor", type="int", \
+        default=0, \
+        help="first read job position in job trace")
+    p.add_option("-R", "--read", dest="read_num", type="int", \
+        default=-1, \
+        help="number of jobs read from the job trace")
+    p.add_option("-p", "--pre", dest="pre_name", type="string",\
+        #default="CQSIM_", \
+        help="previous file name")
+    p.add_option("-o", "--output", dest="output", type="string",\
+        help="simulator result file name")
+    p.add_option("--path_in", dest="path_in", type="string",\
+        #default="Input Files/", \
+        help="input file path")
+    p.add_option("--path_out", dest="path_out", type="string",\
+        #default="Results/", \
+        help="output result file path")
+    p.add_option("--path_tmp", dest="path_tmp", type="string",\
+        #default="Temp/", \
+        help="temp file path")
+    p.add_option("--ext_tmp_j", dest="ext_tmp_job", type="string",\
+        #default=".csv", \
+        help="temp formatted job data extension type")
+    p.add_option("--ext_tmp_n", dest="ext_tmp_node", type="string",\
+        #default=".csv", \
+        help="temp formatted node data extension type")
+    p.add_option("--ext_jr", dest="ext_jr", type="string",\
+        #default=".rst", \
+        help="job result log extension type")
+    p.add_option("--ext_si", dest="ext_si", type="string",\
+        #default=".ult", \
+        help="system information log extension type")
+    p.add_option("--ext_ai", dest="ext_ai", type="string",\
+        #default=".adp", \
+        help="adapt information log extension type")
+    p.add_option("-a", "--alg", dest="alg", type="string",\
+        action="callback", callback=callback_alg,\
+        help="basic algorithm list")
+    p.add_option("-A", "--sign", dest="alg_sign", type="string",\
+        action="callback", callback=callback_alg_sign,\
+        help="sign of the algorithm element in the list")
+        
+    p.add_option("-b", "--bf", dest="backfill", type="int",\
+        default=0, \
+        help="backfill mode")
+    p.add_option("-B", "--bf_para", dest="bf_para", type="string",\
+        action="callback", callback=callback_bf_para,\
+        help="backfill parameter list")
+    p.add_option("-d", "--ad_sta", dest="ad_sta", type="int",\
+        default=0, \
+        help="starting adapt mode")
+    p.add_option("-D", "--ad_sta_para", dest="ad_sta_para", type="string",\
+        action="callback", callback=callback_ad_sta_para,\
+        help="starting adapt parameter list")
+    p.add_option("-g", "--ad_alg", dest="ad_alg", type="int",\
+        default=0, \
+        help="algorithm adapt mode")
+    p.add_option("-G", "--ad_alg_para", dest="ad_alg_para", type="string",\
+        action="callback", callback=callback_ad_alg_para,\
+        help="algorithm adapt parameter list")
+        
+    p.add_option("-c", "--config_n", dest="config_n", type="string",\
+        default="config_n.set", \
+        help="name config file")
+    p.add_option("-C", "--config_sys", dest="config_sys", type="string",\
+        help="system config file")
+        
+    opts, args = p.parse_args()
+
+    inputPara={}
+    inputPara_sys={}
+    inputPara_name={}
+    opts.alg = temp_opt['alg']
+    opts.alg_sign = temp_opt['alg_sign']
+    opts.alg_sign = temp_opt['bf_para']
+    opts.alg_sign = temp_opt['ad_sta_para']
+    opts.alg_sign = temp_opt['ad_alg_para']
+        
+    if opts.config_sys:
+        inputPara_sys = read_config(opts.config_sys) 
+    if opts.config_n:
+        inputPara_name = read_config(opts.config_n)
+        
+    if not opts.job_trace:
+        print "Error: Please specify at least one job trace!"
+        p.print_help()
+        sys.exit()
+    if not opts.node_struc:
+        print "Error: Please specify at least one node structure!"
+        p.print_help()
+        sys.exit()
+    if not opts.output:
+        opts.output = get_raw_name(opts.job_trace)
+    if not opts.job_save:
+        opts.job_save = get_raw_name(opts.job_trace)
+    if not opts.node_save:
+        opts.node_save = get_raw_name(opts.job_trace)
+    if not opts.bf_para:
+        opts.bf_para = []
+    if not opts.ad_sta_para:
+        opts.ad_sta_para = []
+    if not opts.ad_alg_para:
+        opts.ad_alg_para = []
+    '''
+    if not opts.job_save:
+        print "Error: Please specify at least one node structure!"
+        p.print_help()
+        sys.exit()
+    '''
+        
+    inputPara['job_trace']=opts.job_trace
+    inputPara['node_struc']=opts.node_struc
+    inputPara['job_save']=opts.job_save
+    inputPara['node_save']=opts.node_save
+    inputPara['cluster_fraction']=opts.cluster_fraction
+    inputPara['start']=opts.start
+    inputPara['start_date']=opts.start_date
+    inputPara['anchor']=opts.anchor
+    inputPara['read_num']=opts.read_num
+    inputPara['pre_name']=opts.pre_name
+    inputPara['output']=opts.output
+    inputPara['ext_tmp_job']=opts.ext_tmp_job
+    inputPara['ext_tmp_node']=opts.ext_tmp_node
+    inputPara['path_in']=opts.path_in
+    inputPara['path_out']=opts.path_out
+    inputPara['path_tmp']=opts.path_tmp
+    inputPara['ext_jr']=opts.ext_jr
+    inputPara['ext_si']=opts.ext_si
+    inputPara['ext_ai']=opts.ext_ai
+    inputPara['alg']=opts.alg
+    inputPara['alg_sign']=opts.alg_sign
+    inputPara['backfill']=opts.backfill
+    inputPara['bf_para']=opts.bf_para
+    inputPara['ad_sta']=opts.ad_sta
+    inputPara['ad_sta_para']=opts.ad_sta_para
+    inputPara['ad_alg']=opts.ad_alg
+    inputPara['ad_alg_para']=opts.ad_alg_para
+    inputPara['config_r']=opts.config_n
+    inputPara['config_sys']=opts.config_sys
+
+    if not inputPara['pre_name']:
+        inputPara['pre_name']=str(inputPara_name['pre_name'])
+    if not inputPara['ext_tmp_job']:
+        inputPara['ext_tmp_job']=str(inputPara_name['ext_tmp_job'])
+    if not inputPara['ext_tmp_node']:
+        inputPara['ext_tmp_node']=str(inputPara_name['ext_tmp_node'])
+    if not inputPara['path_in']:
+        inputPara['path_in']=str(inputPara_name['path_in'])
+    if not inputPara['path_out']:
+        inputPara['path_out']=str(inputPara_name['path_out'])
+    if not inputPara['path_tmp']:
+        inputPara['path_tmp']=str(inputPara_name['path_tmp'])
+    if not inputPara['ext_jr']:
+        inputPara['ext_jr']=str(inputPara_name['ext_jr'])
+    if not inputPara['ext_si']:
+        inputPara['ext_si']=str(inputPara_name['ext_si'])
+    if not inputPara['ext_ai']:
+        print inputPara['ext_ai'], inputPara_name['ext_ai']
+        inputPara['ext_ai']=str(inputPara_name['ext_ai'])
+
+    cqsim_main.cqsim_main(inputPara)

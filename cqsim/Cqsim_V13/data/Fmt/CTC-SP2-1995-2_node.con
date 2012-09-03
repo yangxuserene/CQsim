@@ -1,0 +1,2 @@
+MaxNodes=430 (batch partition; 512 total)
+MaxProcs=430

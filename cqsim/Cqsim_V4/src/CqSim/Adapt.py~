@@ -1,0 +1,110 @@
+
+__metaclass__ = type
+
+class Adapt:
+    def __init__(self, mode = 0, node_module, debug = None, len = 5, para_list = None):
+        self.mode = mode
+        self.node_module = node_module
+        self.debug = debug
+        self.para_list = para_list
+        self.ad_len = len
+        self.check_len = len
+        self.current_para = []
+        self.seq_list = []
+        self.reset_list()
+        
+    def reset (self, mode = None, node_module = None, debug = None, len = None, para_list = None):
+        if mode:
+            self.mode = mode
+        if node_module:
+            self.node_module = node_module
+        if debug:
+            self.debug = debug
+        if para_list:
+            self.para_list = para_list
+        if len:
+            self.ad_len = len
+            self.check_len = len
+        self.current_para = []
+        self.seq_list = []
+        self.reset_list()
+    
+    def adapt (self, wait_job, para_in = None):
+        self.current_para = para_in
+        i = 0
+        while (i < self.ad_len and i < len(wait_job)):
+            self.waitList.append(wait_job[i])
+            i += 1
+        self.check_len = i
+        result = self.main()
+        return result
+    
+    def main (self):
+        result = []
+        if mode == 1:
+            # window
+            result = self.adapt_window()
+        return result
+    
+    def adapt_adapt (self, para_in = None):
+        return 0
+    def adapt_len (self):
+        return self.ad_len
+    
+    def reset_list (self):
+        self.seq_list = []
+        self.temp_list=[]
+        temp_seq=[]
+        i = 0
+        ele = []
+        while (i<self.ad_len):
+            ele.append(i)
+            self.temp_list.append(-1)
+            i += 1
+        self.build_seq_list(self.ad_len, ele, self.ad_len-1)
+
+    def build_seq_list(seq_len, ele_pool, temp_index):
+        if (seq_len<=1):
+            #print temp_seq , temp_index, ele_pool
+            self.temp_list[temp_index]=ele_pool[0]
+            temp_seq_save = temp_seq[:]
+            self.seq_list.append(temp_seq_save)
+        else:
+            i = seq_len - 1
+            while (i>=0):
+                self.temp_list[temp_index] = ele_pool[i]
+                temp_ele_pool = ele_pool[:]
+                temp_ele_pool.pop(i)
+                build_seq_list(seq_len-1,temp_ele_pool,temp_index-1)
+                i -= 1
+    
+    def adapt_window (self):
+        temp_wait_list = []
+        temp_wait_listB = []
+        temp_last = -1
+        temp_max = 1
+        i = 1
+        while (i<=self.check_len):
+            temp_max = temp_max * i
+            i += 1
+        
+        i = 0
+        while (i<temp_max):
+            j = 0
+            self.node_module.pre_reset(self.current_para['time'])
+            while (j < self.check_len):
+                self.node_module.reserve(self.wait_job[self.seq_list[i][j]]['proc'],\
+                  self.wait_job[self.seq_list[i][j]]['index'], self.wait_job[self.seq_list[i][j]]['time'])
+                j += 1
+            if (temp_last == -1 or temp_last>self.node_module.pre_get_last['end']):
+                temp_last = self.node_module.pre_get_last['end']
+                temp_wait_list = self.seq_list[i]
+            i += 1
+            
+        i = 0
+        while (i<self.check_len):
+            temp_wait_listB.append(self.wait_job[temp_wait_list[i]])
+            i += 1
+        
+        return temp_wait_list
+        

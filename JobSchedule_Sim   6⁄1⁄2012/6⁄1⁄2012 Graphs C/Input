@@ -1,0 +1,16 @@
+
+a.addTask("1.0*(w*100.0/z)+0*(l*100/t)",1,'1',"1\n0\n*","JS_W1_B1_A100","darkred")
+a.addTask("0.50*(w*100.0/z)+0.50*(l*100/t)",1,'1',"0.50\n0.50\n*","JS_W1_B1_A050","darkred")
+a.addTask("0*(w*100.0/z)+1.0*(l*100/t)",1,'1',"0\n1\n*","JS_W1_B1_A000","darkred")
+
+a.addTask("1.0*(w*100.0/z)+0*(l*100/t)",1,'k',"1\n0\n**","JS_W1_Bk_A100","darkblue")
+a.addTask("0.50*(w*100.0/z)+0.50*(l*100/t)",1,'k',"0.50\n0.50\n**","JS_W1_Bk_A050","darkblue")
+a.addTask("0*(w*100.0/z)+1.0*(l*100/t)",1,'k',"0\n1\n**","JS_W1_Bk_A000","darkblue")
+
+a.addTask("1.0*(w*100.0/z)+0*(l*100/t)",5,'k',"1\n0\n***","JS_W5_Bk_A100","orange")
+a.addTask("0.50*(w*100.0/z)+0.50*(l*100/t)",5,'k',"0.50\n0.50\n***","JS_W5_Bk_A050","orange")
+a.addTask("0*(w*100.0/z)+1.0*(l*100/t)",5,'k',"0\n1\n***","JS_W5_Bk_A000","orange")
+
+a.addTask("1.0*(w*100.0/z)+0*(l*100/t)",5,'c',"1\n0\n****","JS_W5_Bc_A100","darkgreen")
+a.addTask("0.50*(w*100.0/z)+0.50*(l*100/t)",5,'c',"0.50\n0.50\n****","JS_W5_Bc_A050","darkgreen")
+a.addTask("0*(w*100.0/z)+1.0*(l*100/t)",5,'c',"0\n1\n****","JS_W5_Bc_A000","darkgreen")

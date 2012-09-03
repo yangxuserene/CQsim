@@ -1,0 +1,9 @@
+pre_name=CQSIM_2
+ext_tmp_job=.csv2
+ext_tmp_node=.csv2
+path_in=Input Files/3
+path_out=Results/3
+path_tmp=Temp/3
+ext_jr=.rst1
+ext_si=.ult2
+ext_ai=.adp3

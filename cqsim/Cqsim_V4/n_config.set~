@@ -1,0 +1,8 @@
+pre=CQSIM_
+ext_tmp_j=.csv
+path_in=Input Files/
+path_out=Results/
+path_tmp=Temp/
+ext_jr=.rst
+ext_si=.ult
+ext_ai=.adp

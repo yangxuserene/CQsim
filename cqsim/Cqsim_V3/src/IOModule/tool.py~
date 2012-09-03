@@ -1,0 +1,4 @@
+
+def read_list(source_str):
+    result_list=[]
+    return result_list
